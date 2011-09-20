@@ -1,0 +1,113 @@
+<Al elegir Departamento>
+Request URL:http://www.elecciones2011.onpe.gob.pe/resultados2011/1ravuelta/onpe/presidente/extras/provincias.php
+Form Data
+elegido:010000
+
+ <option value=""></option>
+    <option value="010100" >CHACHAPOYAS</option>
+    <option value="010200" >BAGUA</option>
+    <option value="010300" >BONGARA</option>
+    <option value="010400" >LUYA</option>
+    <option value="010500" >RODRIGUEZ DE MENDOZA</option>
+    <option value="010600" >CONDORCANQUI</option>
+    <option value="010700" >UTCUBAMBA</option>
+  
+<Al elegir Provincia>
+Request URL:http://www.elecciones2011.onpe.gob.pe/resultados2011/1ravuelta/onpe/presidente/extras/distritos.php
+elegido:010300
+
+ <option value=""></option>
+    <option value="010301" >JUMBILLA</option>
+    <option value="010302" >COROSHA</option>
+    <option value="010303" >CUISPES</option>
+    <option value="010304" >CHISQUILLA</option>
+    <option value="010305" >CHURUJA</option>
+    <option value="010306" >FLORIDA</option>
+    <option value="010307" >RECTA</option>
+    <option value="010308" >SAN CARLOS</option>
+    <option value="010309" >SHIPASBAMBA</option>
+    <option value="010310" >VALERA</option>
+    <option value="010311" >YAMBRASBAMBA</option>
+    <option value="010312" >JAZAN</option>
+
+<Al elegir Distrito>
+Request URL:http://www.elecciones2011.onpe.gob.pe/resultados2011/1ravuelta/onpe/presidente/extras/locales.php
+elegido:010305
+
+SELECT CCODI_LOCAL, CCODI_UBIGEO, TNOMB_LOCAL 
+                 FROM CAT_LOCAL
+                 WHERE CCODI_LOCAL IN (SELECT DISTINCT CCODI_LOCAL 
+                                       FROM TAB_MESA 
+                                       WHERE CCODI_UBIGEO LIKE '010305')         
+                 ORDER BY TNOMB_LOCAL   <option value=""></option>
+    <option value="0040">I.E.18090 CHURUJA</option>
+
+<Al presionar Consultar>
+Request URL:http://www.elecciones2011.onpe.gob.pe/resultados2011/1ravuelta/onpe/presidente/extras/buscar_ubigeo_actas.php
+Form Data
+tipo_consulta1:UBIGEO
+cnume_acta:
+ambito1:P
+dpto:140000
+prov:140100
+dist:140124
+local:Z265
+estado:T
+continente:
+pais:
+ciudad:
+embajada:
+estado2:T
+
+
+       <fieldset style="width:90%;border-style:solid;border-color:#1D539A">
+        <legend class="arial_titulo">Resultados de B&uacute;squeda</legend>
+        <table width="90%" class="borde_tabla" border="0" cellpadding="0" cellspacing="0">
+         <tr bgcolor="#CCCCCC" class="azul12 negrita">
+          <th class="arial_contenido">Item</th>
+          <th class="arial_contenido">N&deg; Mesa</th>
+          <th class="arial_contenido">N&deg; Copia</th>
+          <th class="arial_contenido">Estado de Acta</th>
+          <th class="arial_contenido"></th>
+         </tr>
+             <tr>
+      <td align="center" class="arial_contenido">1</td>
+      <td align="center" class="arial_contenido">168611</td>
+      <td align="center" class="arial_contenido">11K</td>
+      <td align="center" class="arial_contenido">CONTABILIZADA NORMAL</td>
+      <td align="center"><a href="rep_mesas_det_pre.php?cnume_acta=168611" class="ubigeo" target="_self" onClick="javascript:window.status='ONPE'" onmouseout="javascript:window.status='ONPE'" onFocus="window.status='ONPE';return true" onMouseUp="window.status='ONPE'" onMouseDown="window.status='ONPE'" onmouseover="window.status='ONPE';return true"><img src="../../imagenes/site/lupa.gif" border="0" title="Ver detalle de acta electoral">&nbsp;Ver detalle de acta electoral</a></td>
+     </tr>
+    
+         <tr>
+      <td align="center" class="arial_contenido">2</td>
+      <td align="center" class="arial_contenido">168612</td>
+      <td align="center" class="arial_contenido">06V</td>
+      <td align="center" class="arial_contenido">CONTABILIZADA NORMAL</td>
+      <td align="center"><a href="rep_mesas_det_pre.php?cnume_acta=168612" class="ubigeo" target="_self" onClick="javascript:window.status='ONPE'" onmouseout="javascript:window.status='ONPE'" onFocus="window.status='ONPE';return true" onMouseUp="window.status='ONPE'" onMouseDown="window.status='ONPE'" onmouseover="window.status='ONPE';return true"><img src="../../imagenes/site/lupa.gif" border="0" title="Ver detalle de acta electoral">&nbsp;Ver detalle de acta electoral</a></td>
+     </tr>
+    
+         <tr>
+      <td align="center" class="arial_contenido">3</td>
+      <td align="center" class="arial_contenido">201199</td>
+      <td align="center" class="arial_contenido">13A</td>
+      <td align="center" class="arial_contenido">CONTABILIZADA NORMAL</td>
+      <td align="center"><a href="rep_mesas_det_pre.php?cnume_acta=201199" class="ubigeo" target="_self" onClick="javascript:window.status='ONPE'" onmouseout="javascript:window.status='ONPE'" onFocus="window.status='ONPE';return true" onMouseUp="window.status='ONPE'" onMouseDown="window.status='ONPE'" onmouseover="window.status='ONPE';return true"><img src="../../imagenes/site/lupa.gif" border="0" title="Ver detalle de acta electoral">&nbsp;Ver detalle de acta electoral</a></td>
+     </tr>
+    
+        </table>
+    </fieldset>
+#Número Jean Doig
+tipo_consulta1:ACTA
+cnume_acta:246415
+ambito1:P
+dpto:
+prov:
+dist:
+local:
+estado:T
+continente:
+pais:
+ciudad:
+embajada:
+estado2:T
+    

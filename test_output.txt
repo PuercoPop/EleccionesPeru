@@ -1,0 +1,13 @@
+FUERZA 2011:102
+GANA PERU:80
+Votos Blancos:2
+Votos Nulos:10
+Votos Impugnados:0
+------------
+Departamento::AMAZONAS
+Provincia::CHACHAPOYAS
+Distrito::LEVANTO
+Local de Votaci&oacute;n: :C.E. 18052
+Electores H&aacute;biles: :254
+Total de Ciudadanos que Votaron: :194
+-------------
