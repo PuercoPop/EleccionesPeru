@@ -2,7 +2,7 @@
 # -*- coding: utf-8
 
 from BeautifulSoup import BeautifulSoup
-import pdb, IPython
+import pdb
 
 
 def parse_acta(f_handle, f_output):
