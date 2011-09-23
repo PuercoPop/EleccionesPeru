@@ -6,7 +6,7 @@ import psycopg2
 import pdb
 
 
-def parse_acta(f_handle, f_output):
+def parse_acta(f_handle):
   """
   Dentro de una tabla de align center esta la información de ubigeo
 
@@ -29,8 +29,6 @@ def parse_acta(f_handle, f_output):
           votacion = 0
         else:
           votacion = int(item2.contents[0])
-        #print curr_Organ , ':' , votacion
-        f_output.write( ''.join( [curr_Organ , ':' , votacion, '\n'])  )
         d_data[curr_Organ] = int(votacion)
         T_Flag = False
       if not(item2.contents == []):
@@ -44,8 +42,6 @@ def parse_acta(f_handle, f_output):
           votacion = 0
         else:
           votacion = int(item2.contents[0])
-        #print curr_Organ , ':' , votacion 
-        f_output.write( ''.join( [curr_Organ , ':' , str(votacion), '\n']) )
         d_data[curr_Organ] = int(votacion)
         T_Flag = False
       if not(item2.contents == []):
@@ -53,8 +49,6 @@ def parse_acta(f_handle, f_output):
           T_Flag = True 
           curr_Organ = item2.contents[0]
 
-  #print '------------'
-  f_output.write( ''.join( [ '------------' ,'\n']) )
 
   Categorias = [ u'Departamento:', u'Provincia:', u'Distrito:', u'Local de Votaci&oacute;n: ', u'Direcci&oacute;n: ', u'Electores H&aacute;biles: ', u'Total de Ciudadanos que Votaron: ']  #, u'Estado del acta: ', u'Historial del acta: ']
 
@@ -67,21 +61,15 @@ def parse_acta(f_handle, f_output):
   for item in tmp_soup.findAll('td',{'class':'arial_contenido'}):
     if not(item.contents[0] == u'&nbsp;'):
       if T_Flag == True:
-        #print curr_Categoria,':',item.contents[0]
-        f_output.write( ''.join( [ curr_Categoria,':',item.contents[0] ,'\n']) )
         d_data[curr_Categoria] = item.contents[0]
         T_Flag = False
       if item.contents[0] in Categorias:
         T_Flag = True
         curr_Categoria = item.contents[0]
-  #print '-------------'
-  f_output.write( ''.join( [ '-------------','\n']) )
 
 
   for item in tmp_soup.findAll('td',{'class':'arial_contenido_negrita'}):
     if not(item.contents[0] == u'&nbsp;'):
-      pass
-      #print item.contents
 
   for item in tmp_soup.findAll('td',{'class':'arial_titulo'}):
     if not(item.contents[0] == u'&nbsp;'):
@@ -114,8 +102,7 @@ Número de Mesa (P) | Agrupación #1 | Blancos | Nulos | Impugnados | Depar| Pro
   
 if __name__ == "__main__":
   f_handle = open('tmp2.html','r')
-  f_output = open ('test_output.txt','w')
-  data = parse_acta(f_handle,f_output)
+  data = parse_acta(f_handle)
   print data
   conn = psycopg2.connect("dbname=eleccionesperu2011 user=pirata")
   cursor = conn.cursor()
@@ -124,5 +111,4 @@ if __name__ == "__main__":
   cursor.close()
   conn.close()
   f_handle.close()
-  f_output.close()
   

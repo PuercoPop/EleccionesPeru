@@ -5,3 +5,15 @@ ToDo
 ----
 -falta escribir los metodos para insertar la data obtenida a una base de datos
 -sacar la info por voto preferencial para congrsits
+
+
+Dependencies
+------------
+Python2.7
+Psycopg2
+
+Database Table Structure
+------------------------
+
+CREATE TABLE Segunda_Vuelta_Presidente ( num_mesa varchar(12) PRIMARY KEY, blancos integer, nulos integer, impugnados integer, gana_peru integer, fuerza_2011 integer, electores_habiles integer, ciudadanos_total integer , departamento varchar(24), provincia varchar(24), distrito varchar(24), local_de_votacion varchar(30) );
+
