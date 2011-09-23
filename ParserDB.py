@@ -104,7 +104,7 @@ def parse_acta(f_handle, f_output):
   return d_data
 
 def insert_data_SVP( num_acta, d_data,cursor):
- cursor.execute("INSERT INTO segunda_vuelta_presidente (num_mesa,blancos,nulos,impugnados,gana_peru,fuerza_2011,electores_habiles,ciudadanos_total,departamento,provincia,distrito,local_de_votacion) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",( num_acta, d_data[u'Votos Blancos'],d_data[u'Votos Impugnados'], d_data[u'GANA PERU'], d_data[u'FUERZA 2011'], d_data[u'Electores H&aacute;biles: '], d_data[u'Total de Ciudadanos que Votaron: '], d_data[u'Departamento:'], d_data[u'Provincia:'], d_data[u'Distrito:'], d_data[u'Local de Votaci&oacute;n: '] )) 
+ cursor.execute("INSERT INTO segunda_vuelta_presidente (num_mesa,blancos,nulos,impugnados,gana_peru,fuerza_2011,electores_habiles,ciudadanos_total,departamento,provincia,distrito,local_de_votacion) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",( num_acta, d_data[u'Votos Blancos'],d_data[u'Votos Nulos'],d_data[u'Votos Impugnados'], d_data[u'GANA PERU'], d_data[u'FUERZA 2011'], d_data[u'Electores H&aacute;biles: '], d_data[u'Total de Ciudadanos que Votaron: '], d_data[u'Departamento:'], d_data[u'Provincia:'], d_data[u'Distrito:'], d_data[u'Local de Votaci&oacute;n: '] )) 
   
 """
 Table: PrimeraVueltaPresidente
@@ -117,6 +117,12 @@ if __name__ == "__main__":
   f_output = open ('test_output.txt','w')
   data = parse_acta(f_handle,f_output)
   print data
+  conn = psycopg2.connect("dbname=eleccionesperu2011 user=pirata")
+  cursor = conn.cursor()
+  insert_data_SVP('test', data, cursor)
+  conn.commit()
+  cursor.close()
+  conn.close()
   f_handle.close()
   f_output.close()
   
