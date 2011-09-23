@@ -1,4 +1,5 @@
 
+import psycopg2
 import ParserDB,get_mesas
 import re
 

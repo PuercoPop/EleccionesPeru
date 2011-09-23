@@ -70,6 +70,7 @@ def parse_acta(f_handle):
 
   for item in tmp_soup.findAll('td',{'class':'arial_contenido_negrita'}):
     if not(item.contents[0] == u'&nbsp;'):
+      pass
 
   for item in tmp_soup.findAll('td',{'class':'arial_titulo'}):
     if not(item.contents[0] == u'&nbsp;'):
