@@ -19,3 +19,9 @@ Database Table Structure
 
 CREATE TABLE Segunda_Vuelta_Presidente ( num_mesa varchar(12) PRIMARY KEY, blancos integer, nulos integer, impugnados integer, gana_peru integer, fuerza_2011 integer, electores_habiles integer, ciudadanos_total integer , departamento varchar(24), provincia varchar(24), distrito varchar(24), local_de_votacion varchar(30) );
 
+
+
+real    86m46.306s
+user    19m42.416s
+sys     0m4.470s
+

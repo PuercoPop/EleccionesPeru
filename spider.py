@@ -17,9 +17,14 @@ for k_reg in get_mesas.d_regiones.keys():
         mesas = get_mesas.from_centro_get_mesas( get_mesas.d_regiones[k_reg], prov[k_prov], dist[k_dist], centros[k_centro] )
         url_actas = get_mesas.from_mesas_get_actas( mesas, get_mesas.str_2da_vuelta)
         for url in url_actas:
-          html_acta = urllib2.urlopen(url)
-          data = ParserDB.parse_acta(html_acta)
           r_acta = exp.search(url)
+          try:
+            html_acta = urllib2.urlopen(url)
+          except HTTPError, e:
+            f_log = open('error.log','a')
+            f_log.write(''.join( [ r_acta,',',centros[k_centro],',',dist[k_dist],',',prov[k_prov],'\n'])
+            f_log.close()
+          data = ParserDB.parse_acta(html_acta)
           ParserDB.insert_data_SVP(r_acta.group(2),data,cursor)
           conn.commit()
     
