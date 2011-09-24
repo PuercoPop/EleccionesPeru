@@ -93,7 +93,15 @@ def parse_acta(f_handle):
   return d_data
 
 def insert_data_SVP( num_acta, d_data,cursor):
- cursor.execute("INSERT INTO segunda_vuelta_presidente (num_mesa,blancos,nulos,impugnados,gana_peru,fuerza_2011,electores_habiles,ciudadanos_total,departamento,provincia,distrito,local_de_votacion) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",( num_acta, d_data[u'Votos Blancos'],d_data[u'Votos Nulos'],d_data[u'Votos Impugnados'], d_data[u'GANA PERU'], d_data[u'FUERZA 2011'], d_data[u'Electores H&aacute;biles: '], d_data[u'Total de Ciudadanos que Votaron: '], d_data[u'Departamento:'], d_data[u'Provincia:'], d_data[u'Distrito:'], d_data[u'Local de Votaci&oacute;n: '] )) 
+  """
+  Falta revisar si esta la data ya presente.
+  """
+  cursor.execute("SELECT num_mesa FROM segunda_vuelta_presidente WHERE num_mesa = '" + num_acta + "';")
+  tmp_r = cursor.fetchall()
+  if len(tmp_r) > 0:
+    pass #UPDATE_METHOD
+  else:
+    cursor.execute("INSERT INTO segunda_vuelta_presidente (num_mesa,blancos,nulos,impugnados,gana_peru,fuerza_2011,electores_habiles,ciudadanos_total,departamento,provincia,distrito,local_de_votacion) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",( num_acta, d_data[u'Votos Blancos'],d_data[u'Votos Nulos'],d_data[u'Votos Impugnados'], d_data[u'GANA PERU'], d_data[u'FUERZA 2011'], d_data[u'Electores H&aacute;biles: '], d_data[u'Total de Ciudadanos que Votaron: '], d_data[u'Departamento:'], d_data[u'Provincia:'], d_data[u'Distrito:'], d_data[u'Local de Votaci&oacute;n: '] )) 
   
 """
 Table: PrimeraVueltaPresidente

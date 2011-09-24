@@ -5,6 +5,8 @@ ToDo
 ----
 -falta escribir los metodos para insertar la data obtenida a una base de datos
 -sacar la info por voto preferencial para congrsits
+-Hacer el parser para voto preferencial
+Ejemplo: http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/rep_mesas_det_cong.php?cnume_acta=051122
 
 
 Dependencies

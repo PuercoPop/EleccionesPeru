@@ -38,7 +38,9 @@ import pdb
 
 
 #d_provincias = {'Amazonas':'010000','Ancash':020000,'Apurimac':030000,'Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000', 'Junin':'110000', 'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Loreto':'150000', 'Madre de Dios':'160000', 'Moquegua':'170000', 'Pasco':'180000', 'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
-d_regiones = {'Amazonas':'010000','Ancash':020000,'Apurimac':030000,'Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000', 'Junin':'110000', 'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Loreto':'150000', 'Madre de Dios':'160000', 'Moquegua':'170000', 'Pasco':'180000', 'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
+#d_regiones = {'Amazonas':'010000','Ancash':020000,'Apurimac':030000,'Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000', 'Junin':'110000', 'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Loreto':'150000', 'Madre de Dios':'160000', 'Moquegua':'170000', 'Pasco':'180000', 'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
+d_regiones = {'Amazonas':'010000','Ancash':020000,'Apurimac':030000,'Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000',  'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Madre de Dios':'160000', 'Moquegua':'170000',  'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
+
 
 
 str_2da_vuelta = "http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/2davuelta/onpe/presidente/"
