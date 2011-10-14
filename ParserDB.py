@@ -55,8 +55,10 @@ def parse_acta(f_handle):
   Printable_Categorias = []
 
   T_Flag = False
-
-  tmp_soup = BeautifulSoup( str( soup.findAll('table',{'align':'center', 'border':'0'})[0] ) )
+  try:
+    tmp_soup = BeautifulSoup( str( soup.findAll('table',{'align':'center', 'border':'0'})[0] ) )
+  except IndexError:
+    print soup.findAll('table',{'align':'center', 'border':'0'})
 
   for item in tmp_soup.findAll('td',{'class':'arial_contenido'}):
     if not(item.contents[0] == u'&nbsp;'):
@@ -99,8 +101,9 @@ def insert_data_SVP( num_acta, d_data,cursor):
   cursor.execute("SELECT num_mesa FROM segunda_vuelta_presidente WHERE num_mesa = '" + num_acta + "';")
   tmp_r = cursor.fetchall()
   if len(tmp_r) > 0:
-    pass #UPDATE_METHOD
+    print "RECORD ALREADY THERE", num_acta, d_data
   else:
+    print "NEW RECORD", num_acta, d_data
     cursor.execute("INSERT INTO segunda_vuelta_presidente (num_mesa,blancos,nulos,impugnados,gana_peru,fuerza_2011,electores_habiles,ciudadanos_total,departamento,provincia,distrito,local_de_votacion) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",( num_acta, d_data[u'Votos Blancos'],d_data[u'Votos Nulos'],d_data[u'Votos Impugnados'], d_data[u'GANA PERU'], d_data[u'FUERZA 2011'], d_data[u'Electores H&aacute;biles: '], d_data[u'Total de Ciudadanos que Votaron: '], d_data[u'Departamento:'], d_data[u'Provincia:'], d_data[u'Distrito:'], d_data[u'Local de Votaci&oacute;n: '] )) 
   
 """
@@ -108,16 +111,45 @@ Table: PrimeraVueltaPresidente
 Columns:
 Número de Mesa (P) | Agrupación #1 | Blancos | Nulos | Impugnados | Depar| Prov| Dist | Local | Electores Habiles | Ciudadnos que no votaron | 
 """
+
+def insert_post_codes(region,provincia,distrito,centro,cursor):
+  """
+  d_data: diccionario con ubigeos
+  centro: numbre del centro de votacion
+  cursor: db cursor
+  """
+  cursor.execute("SELECT centro FROM ubigeo WHERE centro = '" + centro + "' AND distrito = '" + distrito + "';")
+  tmp_q = cursor.fetchall()
+  if len(tmp_q) >:
+    print "RECORD ALREADY THERE"
+  else
+    print "NEW RECORD"
+    cursor.execute("INSERT INTO ubigeo (region,provincia,distrito,centro) VALUES (%s,%s,%s,%s)",(region,provincia,distrito,centro))
+
+def parse_acta_congreso(f_handle):
+  """
+  Información a extraer:
+  #Mesa
+  UBIGEO + Local
+  #Electores Hábiles
+  #Electores Votaron
+  Estado del Acta
+  Resultados
+  """
+  pass
+
+return d_data
+
   
 if __name__ == "__main__":
-  f_handle = open('tmp2.html','r')
-  data = parse_acta(f_handle)
+  f_handle = open('Ejemplo_Acta_Congreso.html','r')
+  data = parse_acta_congreso(f_handle)
   print data
-  conn = psycopg2.connect("dbname=eleccionesperu2011 user=pirata")
+  """conn = psycopg2.connect("dbname=eleccionesperu2011 user=pirata")
   cursor = conn.cursor()
   insert_data_SVP('test', data, cursor)
   conn.commit()
   cursor.close()
   conn.close()
   f_handle.close()
-  
+  """

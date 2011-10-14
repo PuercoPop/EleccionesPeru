@@ -5,6 +5,8 @@ ToDo
 ----
 -falta escribir los metodos para insertar la data obtenida a una base de datos
 -sacar la info por voto preferencial para congrsits
+-escribir un saneador comparando actas totales contra las actuales.
+-mejorar el parser para que de los códigos de error adecuados
 -Hacer el parser para voto preferencial
 Ejemplo: http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/rep_mesas_det_cong.php?cnume_acta=051122
 
@@ -19,9 +21,19 @@ Database Table Structure
 
 CREATE TABLE Segunda_Vuelta_Presidente ( num_mesa varchar(12) PRIMARY KEY, blancos integer, nulos integer, impugnados integer, gana_peru integer, fuerza_2011 integer, electores_habiles integer, ciudadanos_total integer , departamento varchar(24), provincia varchar(24), distrito varchar(24), local_de_votacion varchar(30) );
 
+Error
+NEW RECORD 263816 {u'Total de Ciudadanos que Votaron: ': u'236', u'FUERZA 2011': 143, u'Votos Nulos': 5, u'Distrito:': u'VILLA EL SALVADOR', u'Votos Blancos': 0, u'Departamento:': u'LIMA', u'GANA PERU': 88, u'Electores H&aacute;biles: ': u'259', u'Provincia:': u'LIMA', u'Votos Impugnados': 0, u'Local de Votaci&oacute;n: ': u'IE 6080 ROSA DE AMERICA'}
+NEW RECORD 263818 {u'Total de Ciudadanos que Votaron: ': u'121', u'FUERZA 2011': 69, u'Votos Nulos': 1, u'Distrito:': u'VILLA EL SALVADOR', u'Votos Blancos': 1, u'Departamento:': u'LIMA', u'GANA PERU': 50, u'Electores H&aacute;biles: ': u'133', u'Provincia:': u'LIMA', u'Votos Impugnados': 0, u'Local de Votaci&oacute;n: ': u'IE 6080 ROSA DE AMERICA'}
+NEW RECORD 263822 {u'Total de Ciudadanos que Votaron: ': u'124', u'FUERZA 2011': 52, u'Votos Nulos': 3, u'Distrito:': u'VILLA EL SALVADOR', u'Votos Blancos': 1, u'Departamento:': u'LIMA', u'GANA PERU': 68, u'Electores H&aacute;biles: ': u'130', u'Provincia:': u'LIMA', u'Votos Impugnados': 0, u'Local de Votaci&oacute;n: ': u'IE 6080 ROSA DE AMERICA'}
+NEW RECORD 264062 {u'Total de Ciudadanos que Votaron: ': u'152', u'FUERZA 2011': 73, u'Votos Nulos': 2, u'Distrito:': u'VILLA EL SALVADOR', u'Votos Blancos': 2, u'Departamento:': u'LIMA', u'GANA PERU': 75, u'Electores H&aacute;biles: ': u'173', u'Provincia:': u'LIMA', u'Votos Impugnados': 0, u'Local de Votaci&oacute;n: ': u'IE 6080 ROSA DE AMERICA'}
+NEW RECORD 264073 {u'Total de Ciudadanos que Votaron: ': u'163', u'FUERZA 2011': 79, u'Votos Nulos': 6, u'Distrito:': u'VILLA EL SALVADOR', u'Votos Blancos': 1, u'Departamento:': u'LIMA', u'GANA PERU': 77, u'Electores H&aacute;biles: ': u'178', u'Provincia:': u'LIMA', u'Votos Impugnados': 0, u'Local de Votaci&oacute;n: ': u'IE 6080 ROSA DE AMERICA'}
+Traceback (most recent call last):
+  File "spider.py", line 27, in <module>
+    data = ParserDB.parse_acta(html_acta)
+  File "/home/pirata/Data/EleccionesPeru/ParserDB.py", line 59, in parse_acta
+    tmp_soup = BeautifulSoup( str( soup.findAll('table',{'align':'center', 'border':'0'})[0] ) )
+IndexError: list index out of range
 
-
-real    86m46.306s
-user    19m42.416s
-sys     0m4.470s
-
+real    160m2.884s
+user    43m30.333s
+sys     0m8.259s

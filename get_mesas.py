@@ -38,8 +38,7 @@ import pdb
 
 
 #d_provincias = {'Amazonas':'010000','Ancash':020000,'Apurimac':030000,'Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000', 'Junin':'110000', 'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Loreto':'150000', 'Madre de Dios':'160000', 'Moquegua':'170000', 'Pasco':'180000', 'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
-#d_regiones = {'Amazonas':'010000','Ancash':020000,'Apurimac':030000,'Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000', 'Junin':'110000', 'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Loreto':'150000', 'Madre de Dios':'160000', 'Moquegua':'170000', 'Pasco':'180000', 'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
-d_regiones = {'Amazonas':'010000','Ancash':020000,'Apurimac':030000,'Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000',  'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Madre de Dios':'160000', 'Moquegua':'170000',  'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
+d_regiones = {'Amazonas':'010000','Ancash':'020000','Apurimac':'030000','Arequipa':'040000', 'Ayacucho':'050000', 'Cajamarca':'060000', 'Callao':'240000', 'Cusco':'070000', 'Huancavelica':'080000', 'Huanuco':'090000', 'Ica':'100000', 'Junin':'110000', 'La Libertad':'120000', 'Lambayeque':'130000', 'Lima':'140000', 'Loreto':'150000', 'Madre de Dios':'160000', 'Moquegua':'170000', 'Pasco':'180000', 'Piura':'190000', 'Puno':'200000', 'San Martin':'210000', 'Tacna':'220000', 'Tumbes':'230000', 'Ucayali':'250000'}
 
 
 
@@ -151,29 +150,25 @@ estado2:T
 
 if __name__ == "__main__":
     
-    d = from_reg_get_provs( d_regiones['Amazonas'])
-    #print d, ':', d['CHACHAPOYAS']
-    s = from_prov_get_districts( d['CHACHAPOYAS'] )
-    #print s
-    e = from_district_get_centros(s['LEVANTO'])
-    #print e,"0x00x0"
-    results = from_centro_get_mesas(d_regiones['Amazonas'], d['CHACHAPOYAS'],  s['LEVANTO'], e.values()[0])
-    links = from_mesas_get_actas( results, str_2da_vuelta )
+    #d = from_reg_get_provs( d_regiones['Amazonas'])
+    #s = from_prov_get_districts( d['CHACHAPOYAS'] )
+    #e = from_district_get_centros(s['LEVANTO'])
+    #results = from_centro_get_mesas(d_regiones['Amazonas'], d['CHACHAPOYAS'],  s['LEVANTO'], e.values()[0])
+    #links = from_mesas_get_actas( results, str_2da_vuelta )
     #print links
     #print results
-    for url in links:
-      html_acta = urllib2.urlopen(url)
-      f_tmp = open( url[-5:] + '.txt','w')
-      Parser.parse_acta( html_acta , f_tmp )
-      f_tmp.close()
+    #for url in links:
+    #  html_acta = urllib2.urlopen(url)
+    #  f_tmp = open( url[-5:] + '.txt','w')
+    #  Parser.parse_acta( html_acta , f_tmp )
+    #  f_tmp.close()
     #f_results = open( 'tmp_resultados.html','w')
-    
+     
     #for line in results.read():
     #  f_results.write(line)
     
-    #f_results.close()
-    #f_tmp = open('tmp_resultados.html','r')
-    #from_mesas_get_actas( f_tmp )
-    #f_tmp.close()
-    #IPython.embed()
-    
+    html_acta = open('Ejemplo_Acta_Segunda_Vuelta.html','r')
+    f_tmp = open('test.out','w')
+    Parser.parse_acta( html_acta, f_tmp) 
+    html_acta.close()
+    f_tmp.close()
