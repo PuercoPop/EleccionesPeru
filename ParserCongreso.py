@@ -238,5 +238,6 @@ def parse_acta_congreso( f_acta ):
 if __name__ == "__main__":
   f_acta = open('test_cases/Ejemplo_Acta_Congreso_2.html','r')
   data = parse_acta_congreso( f_acta)
-  print data
+  for k_iter in data.keys():
+    print k_iter,' : ',data[k_iter]
   f_acta.close()

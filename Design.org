@@ -1,0 +1,29 @@
+
+
+
+* Overview: EleccionesPeru
+** ONPE-Crawler
+   By default write all error to error.log
+*** API
+    ONPEcrawler( url)
+    [departamento, ...] = ONPEcrawler.get_departamentos()
+    [departamento, ...] = ONPEcrawler.get_departamentos( str_match )
+    provincia = ONPEcrawler.get_provincia( departamento)
+    [provincia, ...] = ONPEcrawler.list_provincias( departament )
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.get_info_from_departamento( departamento)
+    ([struct_mesa, ...] , [error_list] ) = ONPEcrawler.get_info_from_provincia(provincia)
+    struct_mesa = ONPEcrawler.get_info( num_mesa )
+
+** Database ORM
+*** API
+    orm( database_name )
+    orm.write(struct_mesa)
+    orm.check_if_database_exists()
+    orm.create_database()
+    
+
