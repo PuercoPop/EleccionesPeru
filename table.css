@@ -1,0 +1,13 @@
+
+table {
+    border:solid;
+    border-width:1px;
+}
+
+th {
+    background-color:green;
+}
+
+td {
+    background-color:yellow;
+}

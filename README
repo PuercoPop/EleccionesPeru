@@ -1,4 +1,4 @@
-MIT License
+BSD License
 
 
 ToDo
@@ -15,6 +15,7 @@ Dependencies
 ------------
 Python2.7
 Psycopg2
+BeautifulSoup
 
 Database Table Structure
 ------------------------

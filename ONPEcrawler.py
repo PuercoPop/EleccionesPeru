@@ -124,13 +124,16 @@ class ONPEcrawler():
         with open(path, 'r') as f:
             tree = pickle.load( f )
         return tree
+
     def recur_helper(self, tree, f_html):
         f_html.write('<table>')
         for leaf in tree:
             f_html.write('<tr>')
             if leaf == 'child':
+                f_html.write('<td>')
                 for node in tree['child']:
                     self.recur_helper( node, f_html )
+                f_html.write('</td>')
             else:
                 f_html.write("<th>%s</th>" % (leaf,))
                 f_html.write("<td>%s</th>" % (tree[leaf],) ) 
@@ -140,7 +143,8 @@ class ONPEcrawler():
 
     def tree_2_html(self, tree , f_html):
         #header
-        f_html.write('<!DOCTYPE html>\n<head><meta encoding="utf-8"</head>' )
+        f_html.write('<!DOCTYPE html>\n<head><meta encoding="utf-8">')
+        f_html.write('<link rel="stylesheet" type="text/css" href="table.css"></head>' )
         f_html.write('<body>')
         #do_stuff
         """
@@ -163,6 +167,7 @@ class ONPEcrawler():
 
 if __name__ == '__main__':
     #Congreso :"http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/"
+    #Ejemplo Acta URL: http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/rep_mesas_det_cong.php?cnume_acta=240245
     crawler = ONPEcrawler(url = "http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/" )
     #tree = crawler.fetch_tree()
     #crawler.save_tree( tree, 'tree.dump' )

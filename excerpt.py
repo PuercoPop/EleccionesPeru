@@ -16,9 +16,11 @@ with open( 'test_cases/tmp_resultados.html', 'r') as f:
     print len( [ i for i in soup.findAll('tr') if (len(i.findAll('td') ) > 0 )] )
     for tr in soup.findAll('tr'):
         if tr.findAll('td'):
-            print 'numero de mesa : ', tr.findAll('td')[1].string
-            print 'estado del acta : ', tr.findAll('td')[3].string
-            #print 'url : ', tr.findAll('td')[4].find('a').attrs[0][1]
-            print 'url : ', tr.findAll('td')[4].find('a')['href']
+            if len( tr.findAll('td')) == 1:
+                pass
+            else:
+                print 'numero de mesa : ', tr.findAll('td')[1].string
+                print 'estado del acta : ', tr.findAll('td')[3].string
+                print 'url : ', tr.findAll('td')[4].find('a')['href']
 
     
