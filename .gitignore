@@ -3,5 +3,6 @@
 *.swo
 *.pyc
 \#*#
+.\#*
 logs/*
 env/*
