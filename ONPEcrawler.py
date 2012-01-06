@@ -124,8 +124,41 @@ class ONPEcrawler():
         with open(path, 'r') as f:
             tree = pickle.load( f )
         return tree
+    def recur_helper(self, tree, f_html):
+        f_html.write('<table>')
+        for leaf in tree:
+            f_html.write('<tr>')
+            if leaf == 'child':
+                for node in tree['child']:
+                    self.recur_helper( node, f_html )
+            else:
+                f_html.write("<th>%s</th>" % (leaf,))
+                f_html.write("<td>%s</th>" % (tree[leaf],) ) 
+                
+            f_html.write('</tr>')
+        f_html.write('</table>')
+
     def tree_2_html(self, tree , f_html):
-        pass
+        #header
+        f_html.write('<!DOCTYPE html>\n<head><meta encoding="utf-8"</head>' )
+        f_html.write('<body>')
+        #do_stuff
+        """
+        f_html.write('<table>')
+        for leaf in tree:
+            f_html.write('<tr>')
+            if leaf == 'child':
+                f_html.write('pass')
+            else:
+                f_html.write("<th>%s</th>" % (leaf,))
+                f_html.write("<td>%s</th>" % (tree[leaf],) ) 
+            f_html.write('</tr>')
+        f_html.write('</table>')
+        """
+        self.recur_helper( tree, f_html )
+        #tail
+        f_html.write('</body>')
+
 
 
 if __name__ == '__main__':
@@ -134,8 +167,7 @@ if __name__ == '__main__':
     #tree = crawler.fetch_tree()
     #crawler.save_tree( tree, 'tree.dump' )
     tree = crawler.load_tree( 'tree.dump')
-    json_tree = crawler.tree_2_json
     with open('tree.html','w') as f:
-        tree_2_html(tree , f)
+        crawler.tree_2_html(tree , f)
         
 
