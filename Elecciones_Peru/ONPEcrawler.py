@@ -3,8 +3,7 @@
 from urllib import urlencode
 from  urllib2 import Request, urlopen
 from BeautifulSoup import BeautifulSoup
-import pickle
-import json
+impot models as m
 
 class ONPEcrawler():
     def __init__(self, url):
@@ -35,6 +34,42 @@ class ONPEcrawler():
                               'Tacna':'220000',
                               'Tumbes':'230000',
                               'Ucayali':'250000'}
+
+def seed_tree(self):
+    for departamento in self.departamentos:
+        #Save into models
+        depar = m.UbiGeo(nombre=departamento,tipo='departamento')
+        depar.save()
+        depar_post_info = m.Info_Http(ubigeo=p,post_code=departamento['post_code'],parent=None)
+        depar_post_info.save()
+
+
+def make_tree(self):
+    for departamento in self.departamentos:
+        req = Request( self.url + 'extras/provincias.php',
+                       urlencode( {'elegido':departamento['post_code'] } ))
+        f = urlopen( req )
+        soup = BeautifulSoup( f.read() )
+        f.close()
+        for item in soup.findAll('option'):
+            if item.string is not None:
+                    #item.string = name ie. u'Amazonas'
+                    #item['value'] = post_code ie. 19291
+                prov = UbiGeo(nombre=item.string, tipo='provincia',post_code= item[value],parent=depar)
+                prov.save()
+
+        #Ahora hacer query a los Ubigeo que tengan el departamento de parent
+        for provincia in m.UbiGeo.objects.filter( parent=depar ):
+            req = Request( self.url + 'extras/distritos.php',
+                           urlencode( {'elegido':provincia.post_code }))
+            f = urlopen( req )
+            soup = BeautifulSoup( f.read() )
+            f.close()
+            for item in soup.findAll('option'):
+                if item.string is not None:
+                    dist = UbiGeo(tipo='distrito', post=code item[value], parent=provincia )
+                    dist.save()
+
 
     def fetch_tree(self):
         tree = {'name':'Peru', 'type':'Nacional', 'post_code':None, 'child':[]}
@@ -119,14 +154,7 @@ class ONPEcrawler():
                                     print "Bajando Acta Num: ", tr.findAll('td')[4].find('a')['href']
                                     
                     
-        return tree
-    def save_tree(self, tree, path ):
-        with open( path, 'w') as f:
-             pickle.dump( tree, f )
-    def load_tree(self, path ):
-        with open(path, 'r') as f:
-            tree = pickle.load( f )
-        return tree
+
 
 
     def search_tree(departamento=None, provincia=None, distrito=None, local=None, num_mesa=None ):
@@ -177,10 +205,6 @@ if __name__ == '__main__':
     #Congreso :"http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/"
     #Ejemplo Acta URL: http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/rep_mesas_det_cong.php?cnume_acta=240245
     crawler = ONPEcrawler(url = "http://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2011/1ravuelta/onpe/congreso/" )
-    tree = crawler.fetch_tree()
-    crawler.save_tree( tree, 'tree.dump' )
-    #tree = crawler.load_tree( 'tree.dump')
-    #with open('tree.html','w') as f:
-    #    crawler.tree_2_html(tree , f)
-        
+    crawler.make_tree()
+            
 
