@@ -1,17 +1,21 @@
+# coding=utf8
 from django.db import models
 
-# Create your models here.
 """
 Agrupacion:Nulos, Blancos, Impugnados
 """
-
+"""
 class Info_Http(models.Model):
-    ubigeo = models.ForeignKey('UbiGeo')
+    ubigeo = models.ForeignKey('UbiGeo', unique=True)
     post_code = models.CharField( max_length=20 )
+
+    def __unicode__(self):
+        return u'Ubigeo: %s | post code: %s' % (self.ubigeo, self.post_code)
+"""
 
 class Locales(models.Model):
     local = models.ForeignKey('UbiGeo')
-    direccion = models.CharField( max_length 360)
+    direccion = models.CharField( max_length = 360)
 
 class UbiGeo(models.Model):
     OPCIONES_TIPO= (
@@ -22,14 +26,19 @@ class UbiGeo(models.Model):
         )
     nombre = models.CharField( max_length= 120 )
     tipo = models.CharField( max_length = 60, choices=OPCIONES_TIPO )
-    parent = models.ForeignKey('self')
+    post_code = models.CharField( max_length=20 )
+    parent = models.ForeignKey('self',null=True)
+
+    def __unicode__(self):
+        return u'%s: %s' % (self.tipo, self.nombre)
 
 class Info_Electoral(models.Model):
-    num_mesa = models.IntegerField()
-    local = models.ForeignKey('UbiGeo')
-    departamento = models.ForeignKey('UbiGeo')
-    provincia = models.ForeignKey('UbiGeo')
-    local = models.ForeignKey('UbiGeo')
+    num_mesa = models.IntegerField(primary_key=True)
+    estado = models.CharField( max_length = 60 )
+    local = models.ForeignKey('UbiGeo', related_name='from_local')
+    departamento = models.ForeignKey('UbiGeo',related_name='from_departamento')
+    provincia = models.ForeignKey('UbiGeo', related_name='from_provincia')
+    distrito = models.ForeignKey('UbiGeo', related_name='from_distrito')
 
 class voto_congresal(models.Model):
     proceso = models.CharField( max_length = 120 )
