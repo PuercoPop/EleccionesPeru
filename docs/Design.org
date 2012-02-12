@@ -1,0 +1,63 @@
+
+
+
+* Overview: EleccionesPeru
+
+** Minimo a Implentar Para el Congreso
+   -Get tree
+   -Save-tree
+   -Load-tree
+   -get_info_from_province
+
+** ONPE-Crawler
+   By default write all error to error.log
+*** API
+    ONPEcrawler( url)
+
+    struct_tree = ONPEcrawler.get_tree()
+    ONPEcrawler.save_tree( /path/to/tree )
+    struct_tree = ONPEcrawler.load_tree( /path/to/tree )
+    
+    [departamento, ...] = ONPEcrawler.get_departamentos()
+    [departamento, ...] = ONPEcrawler.get_departamentos( str_match )
+    provincia = ONPEcrawler.get_provincia( departamento)
+    [provincia, ...] = ONPEcrawler.list_provincias( departament )
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.
+    ONPEcrawler.get_info_from_departamento( departamento)
+    ([struct_mesa, ...] , [error_list] ) = ONPEcrawler.get_info_from_provincia(provincia)
+    struct_mesa = ONPEcrawler.get_info( num_mesa )
+    
+*** Data Structures
+    
+    -name for Top Level:Peru
+    -Types Nacional, Departamento, Provincia and Distrito must point to another struct_tree.
+    -Type local must point to struct_info
+    -All leaves must be/end in struct_info
+
+    struct_tree {
+    name
+    type : [Departamento, Provincia, Distrito, local]
+    if type:local
+    mesas: int
+    child_ptr* next
+    }
+    struct_info {
+    num_mesa
+    url
+    estado
+    
+    }
+** Database ORM
+*** API
+    orm( database_name )
+    orm.write(struct_mesa)
+    orm.check_if_database_exists()
+    orm.create_database()
+    
+
+
+
