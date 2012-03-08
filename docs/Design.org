@@ -1,63 +1,138 @@
+*  Overview: EleccionesPeru
+  El problema se puede separar en dos. Primero el Recoletar y organizar la Data 
+  en una base de Datos. Segundo el mostrar los Resultados.
+
+** Recolecion de la Data
+   Esta Tarea a la vez se separar en dos. Primero el recoletar la data necesaria
+   para perdir la informacion del servidor de la ONPE (POST, urls, etc). Segundo,
+   El apartir de esa metada data poder bajar y guardar la data entera o por
+   porciones.
+   
+*** generate_medatada.py
+
+**** Data Structures
+     Estructura devuelta
+     json
+     
+     {
+       name:,
+       type:Departamento,
+       post_code:
+       provincias: [
+         { 
+	   name:,
+	   type: Provincia,
+	   distritos: [
+	     name:,
+	     type: local,
+	     post_code,
+	     mesas_total,
+	     locales: [
+	       name:,
+	       num_mesa:,
+	       url:
+	       estado:,
+	     ]
+	   ]
+	 }
+       ]
+     }
+
+     tree = {
+         name:,
+	 type : [Departamento, Provincia, Distrito, local]
+	 if type:local
+	 mesas: int
+	 child_ptr* next
+     }
+
+     struct_info {
+     num_mesa
+     url
+     estado
+     
+     } 
+
+**** API
+     build_tree()
+     build_Departamentos()
+     build_Provincias()
+     build_Distrito()
+     build_locales()
+     build_mesas()
 
 
+*** ONPEcrawler.py
+**** API
+     ONPEcrawler( url)
 
-* Overview: EleccionesPeru
+     struct_tree = ONPEcrawler.get_tree()
+     ONPEcrawler.save_tree( /path/to/tree )
+     struct_tree = ONPEcrawler.load_tree( /path/to/tree )
+     
+     [departamento, ...] = ONPEcrawler.get_departamentos()
+     [departamento, ...] = ONPEcrawler.get_departamentos( str_match )
+     provincia = ONPEcrawler.get_provincia( departamento)
+     [provincia, ...] = ONPEcrawler.list_provincias( departament )
+     ONPEcrawler.
+     ONPEcrawler.
+     ONPEcrawler.
+     ONPEcrawler.
+     ONPEcrawler.
+     ONPEcrawler.get_info_from_departamento( departamento)
+     ([struct_mesa, ...] , [error_list] ) = ONPEcrawler.get_info_from_provincia(provincia)
+     struct_mesa = ONPEcrawler.get_info( num_mesa )
+     
+**** Data Structures
 
-** Minimo a Implentar Para el Congreso
-   -Get tree
-   -Save-tree
-   -Load-tree
-   -get_info_from_province
+     -name for Top Level:Peru
+     -Types Nacional, Departamento, Provincia and Distrito must point to another struct_tree.
+     -Type local must point to struct_info
+     -All leaves must be/end in struct_info
 
-** ONPE-Crawler
-   By default write all error to error.log
-*** API
-    ONPEcrawler( url)
 
-    struct_tree = ONPEcrawler.get_tree()
-    ONPEcrawler.save_tree( /path/to/tree )
-    struct_tree = ONPEcrawler.load_tree( /path/to/tree )
-    
-    [departamento, ...] = ONPEcrawler.get_departamentos()
-    [departamento, ...] = ONPEcrawler.get_departamentos( str_match )
-    provincia = ONPEcrawler.get_provincia( departamento)
-    [provincia, ...] = ONPEcrawler.list_provincias( departament )
-    ONPEcrawler.
-    ONPEcrawler.
-    ONPEcrawler.
-    ONPEcrawler.
-    ONPEcrawler.
-    ONPEcrawler.get_info_from_departamento( departamento)
-    ([struct_mesa, ...] , [error_list] ) = ONPEcrawler.get_info_from_provincia(provincia)
-    struct_mesa = ONPEcrawler.get_info( num_mesa )
-    
-*** Data Structures
-    
-    -name for Top Level:Peru
-    -Types Nacional, Departamento, Provincia and Distrito must point to another struct_tree.
-    -Type local must point to struct_info
-    -All leaves must be/end in struct_info
+     Tabla  Ubigeos
+     |----------------+-----------+----------+-----------+--------------|
+     | numero_de_acta | direccion | distrito | provicina | departamento |
+     |----------------+-----------+----------+-----------+--------------|
+     |                |           |          |           |              |
+     |                |           |          |           |              |
 
-    struct_tree {
-    name
-    type : [Departamento, Provincia, Distrito, local]
-    if type:local
-    mesas: int
-    child_ptr* next
-    }
-    struct_info {
-    num_mesa
-    url
-    estado
-    
-    }
+     Tabla Agrupaciones
+     |-----------------+---------------------|
+     | Agrupacion (id) | Agrupacion (nombre) |
+     |-----------------+---------------------|
+     |                 |                     | 
+
+     Tabla_Proceso_Map
+     |--------------+------------------|
+     | Proceso (id) | Proceso (nombre) |
+     |--------------+------------------|
+     |              |                  |
+
+     Tabla_Proceso
+     |----------------+---------------+-------+----------+--------------|
+     | numero de acta | Votos Totales | nulos | viciados | Proceso (id) |
+     |----------------+---------------+-------+----------+--------------|
+     |                |               |       |          |              |
+
+     Tabla Presidencial
+     |----------------+-----------------+-------|
+     | numero de acta | Agrupacion (id) | votos |
+     |----------------+-----------------+-------|
+     |                |                 |       |
+
+     Tabla Congreso
+     |----------------+-----------------+-----------------+---+---+---+-----+----|
+     | numero de acta | Agrupacion (id) | Total (Partido) | 1 | 2 | 3 | ... | 36 |
+     |----------------+-----------------+-----------------+---+---+---+-----+----|
+     |                |                 |                 |   |   |   |     |    |
+
+   
+
 ** Database ORM
 *** API
     orm( database_name )
     orm.write(struct_mesa)
     orm.check_if_database_exists()
     orm.create_database()
-    
-
-
-
